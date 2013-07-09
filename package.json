@@ -1,7 +1,7 @@
 {
   "name": "looper",
-  "description": "",
-  "version": "0.0.0",
+  "description": "async loops that never RangeError",
+  "version": "1.0.0",
   "homepage": "https://github.com/dominictarr/looper",
   "repository": {
     "type": "git",
