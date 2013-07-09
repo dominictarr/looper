@@ -34,3 +34,17 @@ tape('sometimes async is okay', function (t) {
   })()
 
 })
+
+tape('arguments', function (t) {
+  var r = Math.random()
+
+  looper(function (R) {
+    t.equal(R, r)
+    if(Math.random() > 0.1)
+      this(r = Math.random())
+    else
+      t.end()
+  })(r)
+
+})
+
