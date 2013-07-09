@@ -28,9 +28,10 @@ var l = 100000
 var loop = require('looper')
 
 var l = 100000
-loop(function (next) {
+loop(function () {
+  var next = this
   if(--l) probablySync(next)
-})
+})()
 ```
 
 when you want to stop looping, don't call `next`.
