@@ -1,14 +1,24 @@
 
-var looper = module.exports = function (fun) {
-  (function next () {
-    var loop = true, returned = false, sync = false
-    do {
-      sync = true; loop = false
-      fun.call(this, function () {
-        if(sync) loop = true
-        else     next()
-      })
-      sync = false
-    } while(loop)
-  })()
+
+module.exports = function (fn) {
+  var active = false, called = 0
+  return function () {
+    called = true
+    if(!active) {
+      active = true
+      while(called) {
+        called = false
+        fn()
+      }
+      active = false
+    }
+  }
 }
+
+
+
+
+
+
+
+

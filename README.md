@@ -21,17 +21,24 @@ var l = 100000
 ```
 
 `looper` detects that case, and falls back to a `while` loop,
+in computer science something like this is called a [trampoline](https://en.wikipedia.org/wiki/Trampoline_(computing))
+this module is simpler than other trampoline libraries such as [tail-call](https://github.com/Gozala/js-tail-call)
+because it does not preserve arguments. But this is still useful
+for looping when  async recursion is sometimes sync.
+
+This is about 10 times faster than using [setImmediate](http://devdocs.io/node~6_lts/timers#timers_setimmediate_callback_args)
 
 ## Example
 
 ``` js
-var loop = require('looper')
+var looper = require('looper')
 
 var l = 100000
-loop(function () {
-  var next = this
+var next = looper(function () {
   if(--l) probablySync(next)
-})()
+})
+
+next()
 ```
 
 when you want to stop looping, don't call `next`.
@@ -41,3 +48,4 @@ so you can even mix sync and async calls!
 ## License
 
 MIT
+
